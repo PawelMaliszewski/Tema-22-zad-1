@@ -28,6 +28,7 @@ public class MailService {
             helper.setTo("bootcamp@spoko.pl");
             helper.setSubject(subject + ", Email: " + receiver);
             helper.setText(content, true);
+            helper.setReplyTo(receiver);
             javaMailSender.send(helper.getMimeMessage());
         } catch (MessagingException e) {
             logger.warn("BŁĄD - nie udało się wysłać wiadomości");
