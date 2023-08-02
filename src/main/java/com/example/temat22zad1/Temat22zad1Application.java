@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class Temat22zad1Application {
 
     public static void main(String[] args) {
+
         SpringApplication.run(Temat22zad1Application.class, args);
     }
-
 }

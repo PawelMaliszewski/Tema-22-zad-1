@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<header th:fragment="header">
+    <div class="fragments-header-div">
+        <div class="fragments-header-text">
+        <h1 >Zakład Mechaniki Pojazdowej</h1>
+        <h2>DO BRAMY I SIĘ NIE ZNAMY</h2>
+        </div>
+    </div>
+</header>
+
+<div th:fragment="options">
+    <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+        <a th:if="${location} != 'index'"
+           href="/"
+           class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Strona główna</a>
+        <a style="margin-left: 15px"
+           class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
+           th:each="opt: ${T(com.example.temat22zad1.Options).values()}"
+           th:text="${opt.getDescription()}"
+           th:href="${opt.getLink()}">
+        </a>
+    </div>
+</div>
+
+<div th:fragment="index" style="text-align: justify">
+    <h2>O firmie:</h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed libero odio, euismod non consequat ac, tincidunt et
+        erat. Mauris est nibh, semper sed enim eu, ornare venenatis lectus. Nunc sed semper purus. Class aptent taciti
+        sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nunc nec nisi aliquam, ultrices est egestas,
+        bibendum lacus. In hac habitasse platea dictumst. Ut efficitur quis urna vitae condimentum. Nulla facilisi. Phasellus
+        vel commodo ligula. In sit amet justo odio. In dictum tincidunt ullamcorper. Ut risus tortor, tempor at condimentum
+        eu, elementum et diam. Donec consequat libero a leo accumsan, ac pulvinar libero facilisis. Nam sollicitudin ante
+        justo, in sodales ante elementum non. Ut pharetra orci eget est pharetra imperdiet. Duis pellentesque nisl libero,
+        ut hendrerit lectus mattis quis. Aenean id velit rhoncus, iaculis nibh sit amet, luctus dui. Duis et ultrices tortor,
+        in auctor nibh. Donec lacinia rhoncus nisl sit amet consectetur. Aliquam porttitor est arcu, et congue purus tempor non.
+        Donec pharetra laoreet aliquam. Praesent nec nisl dictum, faucibus tellus in, rutrum nunc. Phasellus a eros ante.
+    </p>
+</div>
+
+
+<div class="hours" th:fragment="opening-hours">
+    <h1><u style="color: red">ZAPRASZAMY</u></h1>
+    <h2>PON. - PT.</h2>
+    <h2>8:00 - 17:00</h2>
+    <br>
+    <h2>SOBOTA</h2>
+    <h2>8:00 - 13:00</h2>
+</div>
+
+<div class="service" th:fragment="service">
+    <ul th:each="ser: ${T(com.example.temat22zad1.ServiceProvided).values()}"
+        class="list-group list-group-horizontal justify-content-md-center mb-3">
+        <li th:text="${ser.description}" class="list-group-item" style="width: 300px"></li>
+        <li th:text="|${ser.getPrice()}zł|" class="list-group-item"></li>
+    </ul>
+</div>
+
+<div class="contactForm" th:fragment="contact">
+    <h2>Formularz kontaktowy</h2>
+    <form  action="/send-email" th:object="${email}" method="post">
+        <div class="mb-2">
+            <label for="sender-name" class="form-label">Imię i nazwisko</label>
+            <input th:field="*{subject}" type="text" class="form-control" id="sender-name" placeholder="imię i nazwisko" >
+        </div>
+        <div class="mb-2">
+            <label for="email" class="form-label">Wpisz adres e-mail</label>
+            <input th:field="*{senderEmail}"  type="email" class="form-control" id="email" placeholder="adres email" >
+        </div>
+        <div class="mb-3">
+            <label for="massage" class="form-label">Wiadomość</label>
+            <textarea  th:field="*{massage}"  class="form-control" id="massage" rows="4" cols="50" placeholder="Treść wiadomości ..."></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Wyślij</button>
+    </form>
+</div>
+
+<footer th:fragment="footer" class="footer">
+    <p style="align-content: flex-end">Wszelkie prawa zastrzeżone: &copy;</p>
+</footer>
+
+<div class="email-confirmation" th:fragment="massage-sent">
+   <h2>Twoja wiadomość została wysłana</h2>
+    <h3>Niedługo otrzymasz potwierdzenie</h3>
+</div>
+
+</body>
+</html>
