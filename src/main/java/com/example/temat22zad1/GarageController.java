@@ -17,35 +17,35 @@ public class GarageController {
     }
 
     @GetMapping("/")
-    String home(Model model) {
-        model.addAttribute("location", "index");
+    String home() {
         return "index";
     }
 
     @GetMapping("/service")
-    String service(Model model) {
-        model.addAttribute("location", "service");
-        return "index";
+    String service() {
+        return "service";
     }
 
     @GetMapping("/opening-hours")
-    String openingHours(Model model) {
-        model.addAttribute("location", "opening-hours");
-        return "index";
+    String openingHours() {
+        return "opening-hours";
     }
 
     @GetMapping("/contact")
     String contact(Model model) {
         Email email = new Email();
         model.addAttribute("email", email);
-        model.addAttribute("location", "contact");
-        return "index";
+        return "contact";
+    }
+
+    @GetMapping("/email-confirmation")
+    public String emailConfirmation() {
+        return "/email-confirmation";
     }
 
     @PostMapping("/send-email")
-    public String sendEmail(@ModelAttribute Email email, Model model) throws MessagingException {
+    public String sendEmail(@ModelAttribute Email email) {
         mailService.sendEmail(email.getSenderEmail(), email.getSubject(), email.getMassage());
-        model.addAttribute("location", "massage-sent");
-        return "index";
+        return "redirect:/email-confirmation";
     }
 }

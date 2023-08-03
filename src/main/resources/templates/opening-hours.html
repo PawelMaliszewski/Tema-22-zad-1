@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+  <title>Godziny otwarcia</title>
+</head>
+<body>
+<main layout:fragment="content">
+  <div class="hours" th:fragment="opening-hours">
+    <h1><u style="color: red">ZAPRASZAMY</u></h1>
+    <h2>PON. - PT.</h2>
+    <h2>8:00 - 17:00</h2>
+    <br>
+    <h2>SOBOTA</h2>
+    <h2>8:00 - 13:00</h2>
+  </div>
+</main>
+</body>
+</html>

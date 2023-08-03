@@ -11,6 +11,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class MailService {
 
+    private static final String getConfirmationMessage = """
+                Dzień dobry.
+                Dziękujemy za wiadomość.
+                Niedługo otrzymasz od nas odpowiedz.
+                Pozdrawiamy
+                """;
     private final JavaMailSender javaMailSender;
 
     public MailService(JavaMailSender javaMailSender) {
@@ -26,6 +32,7 @@ public class MailService {
             MimeMessageHelper helper =  new MimeMessageHelper(mimeMessage, "utf-8");
             helper.setFrom("bootcamp@spoko.pl");
             helper.setTo("bootcamp@spoko.pl");
+            helper.setReplyTo(receiver);
             helper.setSubject(subject + ", Email: " + receiver);
             helper.setText(content, true);
             javaMailSender.send(helper.getMimeMessage());
@@ -43,21 +50,12 @@ public class MailService {
             MimeMessageHelper helper =  new MimeMessageHelper(mimeMessage, "utf-8");
             helper.setFrom("bootcamp@spoko.pl");
             helper.setTo(receiver);
-            helper.setSubject("Potwierdzenie otrzymania wiadomości w sprawie " + subject);
-            helper.setText(getConfirmationMessage(), true);
+            helper.setSubject("Potwierdzenie otrzymania wiadomości od: " + receiver);
+            helper.setText(getConfirmationMessage, true);
             javaMailSender.send(helper.getMimeMessage());
         } catch (MessagingException e) {
             logger.warn("BŁĄD - nie udało się wysłać potwierdzenia wiadomości");
         }
         logger.info("potwierdzenie wiadomości wysłane");
-    }
-
-    private static String getConfirmationMessage() {
-        return """
-                Dzień dobry.
-                Dziękujemy za wiadomość.
-                Niedługo otrzymasz od nas odpowiedz.
-                Pozdrawiamy
-                """;
     }
 }

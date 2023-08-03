@@ -10,10 +10,13 @@
     <link rel="stylesheet" href="../static/styles.css" th:href="@{styles.css}">
 </head>
 <body>
+<div class="container">
 <header th:replace="~{fragmets :: header}"></header>
 <div th:insert="~{fragmets :: options}"></div>
 <main layout:fragment="content">
+
 </main>
 <footer th:replace="~{fragmets :: footer}"></footer>
+</div>
 </body>
 </html>

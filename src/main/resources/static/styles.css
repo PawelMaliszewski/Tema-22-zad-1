@@ -36,3 +36,7 @@ body {
   display: flex;
   align-items: flex-end;
 }
+
+.link-primary{
+  margin-right: 15px;
+}
